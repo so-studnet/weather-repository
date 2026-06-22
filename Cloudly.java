@@ -1,7 +1,7 @@
-public class Sunny extends CurrentWeather {
-    public Sunny(CurrentWeatherData currentWeatherData){
+public class Cloudly extends CurrentWeather {
+    public Cloudly(CurrentWeatherData currentWeatherData){
         super(currentWeatherData);
-        weatherType = WeatherEnum.SUNNY;
+        weatherType = WeatherEnum.CLOUDY;
     }
 
     @Override

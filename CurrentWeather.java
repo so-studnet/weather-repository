@@ -1,17 +1,19 @@
 import java.util.Calendar;
 
 public abstract class CurrentWeather extends Object {
-    protected WeatherEnum weather = null;
+    protected WeatherEnum weatherType = null;
+    protected CurrentWeatherData currentWeatherdData = null;
     protected Calendar time = Calendar.getInstance();
-    protected double temperature = 0.0;
-    protected double windSpeed = 0.0;
-    protected double chanceOfRain = 0.0;
+
+    CurrentWeather(CurrentWeatherData currentWeatherData){
+        this.currentWeatherdData = currentWeatherData;
+    }
 
     @Override
     public String toString() {
         return String.format(
-                "天気情報：%s / 時刻=%tF %tT / 気温=%.1f℃ / 風速=%.1f m/s",
-                weather, time, time, temperature, windSpeed
+                "場所：%s / 天気情報：%s / 時刻=%tF %tT / 気温=%.1f℃ / 湿度=%d%% / 風速=%.1f m/s",
+                currentWeatherdData.name, weatherType, time, time, currentWeatherdData.mainTemp,currentWeatherdData.mainHumidity, currentWeatherdData.windSpeed
         );
     }
     
@@ -21,35 +23,35 @@ public abstract class CurrentWeather extends Object {
 
         switch (weather.weatherMain) {
             case "Thunderstorm":
-                return new Sunny();
+                return new Rain(weather);
             case "Drizzle":
-                return new Sunny();
+                return new Rain(weather);
             case "Rain":
-                return new Sunny();
+                return new Rain(weather);
             case "Snow":
-                return new Sunny();
+                return new Rain(weather);
             case "Mist":
-                return new Sunny();
+                return new Cloudly(weather);
             case "Smoke":
-                return new Sunny();
+                return new Cloudly(weather);
             case "Haze":
-                return new Sunny();
+                return new Cloudly(weather);
             case "Dust":
-                return new Sunny();
+                return new Cloudly(weather);
             case "Fog":
-                return new Sunny();
+                return new Cloudly(weather);
             case "Sand":
-                return new Sunny();
+                return new Cloudly(weather);
             case "Ash":
-                return new Sunny();
+                return new Cloudly(weather);
             case "Squall":
-                return new Sunny();
+                return new Rain(weather);
             case "Tornado":
-                return new Sunny();
+                return new Rain(weather);
             case "Clear":
-                return new Sunny();
+                return new Sunny(weather);
             case "Clouds":
-                return new Sunny();
+                return new Cloudly(weather);
             default:
                 return null;
         }
