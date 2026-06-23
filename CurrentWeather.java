@@ -9,17 +9,9 @@ public abstract class CurrentWeather extends Object {
         this.currentWeatherdData = currentWeatherData;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "場所：%s / 天気情報：%s / 時刻=%tF %tT / 気温=%.1f℃ / 湿度=%d%% / 風速=%.1f m/s",
-                currentWeatherdData.name, weatherType, time, time, currentWeatherdData.mainTemp,currentWeatherdData.mainHumidity, currentWeatherdData.windSpeed
-        );
-    }
-    
     public static CurrentWeather getInstance(){
 
-        CurrentWeatherData weather = OpenWeatherAPI.getCurrentWeather();
+        CurrentWeatherData weather = OpenWeatherAPI.getCurrentWeather("Osaka");
 
         switch (weather.weatherMain) {
             case "Thunderstorm":
@@ -31,19 +23,19 @@ public abstract class CurrentWeather extends Object {
             case "Snow":
                 return new Rain(weather);
             case "Mist":
-                return new Cloudly(weather);
+                return new Cloudy(weather);
             case "Smoke":
-                return new Cloudly(weather);
+                return new Cloudy(weather);
             case "Haze":
-                return new Cloudly(weather);
+                return new Cloudy(weather);
             case "Dust":
-                return new Cloudly(weather);
+                return new Cloudy(weather);
             case "Fog":
-                return new Cloudly(weather);
+                return new Cloudy(weather);
             case "Sand":
-                return new Cloudly(weather);
+                return new Cloudy(weather);
             case "Ash":
-                return new Cloudly(weather);
+                return new Cloudy(weather);
             case "Squall":
                 return new Rain(weather);
             case "Tornado":
@@ -51,12 +43,19 @@ public abstract class CurrentWeather extends Object {
             case "Clear":
                 return new Sunny(weather);
             case "Clouds":
-                return new Cloudly(weather);
+                return new Cloudy(weather);
             default:
                 return null;
         }
+    
+    }
 
-        
+    @Override
+    public String toString() {
+        return String.format(
+                "場所：%s / 天気情報：%s / 時刻=%tF %tT / 気温=%.1f℃ / 湿度=%d%% / 風速=%.1f m/s",
+                currentWeatherdData.name, weatherType, time, time, currentWeatherdData.mainTemp,currentWeatherdData.mainHumidity, currentWeatherdData.windSpeed
+        );
     }
 
 

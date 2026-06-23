@@ -29,7 +29,6 @@ public abstract class OpenWeatherAPI {
             System.out.println(e);
         }
 
-        System.out.println(json);
 
         // ===== JSON手動パース =====
         CurrentWeatherData data = new CurrentWeatherData();
