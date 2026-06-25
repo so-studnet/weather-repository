@@ -12,8 +12,8 @@ public class WheatherManager extends Object {
 
             switch (command) {
                 case "currentweather":
-                    CurrentWeather wheather = CurrentWeather.getInstance(); 
-                    System.out.println(wheather);
+                    Weather wheather = Weather.getInstance(); 
+                    wheather.perform();
                     break;
 
                 case "help":
@@ -32,6 +32,7 @@ public class WheatherManager extends Object {
         }
 
         sc.close();
+        System.exit(0);
 
     }
 }
